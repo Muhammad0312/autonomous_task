@@ -7,10 +7,31 @@ project(autonomous_task_NAK)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
+
 find_package(catkin REQUIRED COMPONENTS
+  gazebo_msgs
+  nav_msgs
   roscpp
   rospy
   std_msgs
+  geometry_msgs
+  nav_msgs
+  roscpp
+  message_generation
+  actionlib
+  genmsg 
+  actionlib_msgs
+)
+
+add_service_files(
+  FILES
+  MarkerPose.srv
+  intervention_getpoint.srv
+)
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+  geometry_msgs
 )
 
 ## System dependencies are found with CMake's conventions

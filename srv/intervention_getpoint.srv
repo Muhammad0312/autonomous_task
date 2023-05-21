@@ -1,0 +1,6 @@
+# marker_pose.srv
+geometry_msgs/PoseStamped pose_msg
+# Request
+---
+bool success 
+
