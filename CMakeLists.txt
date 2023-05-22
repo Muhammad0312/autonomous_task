@@ -27,6 +27,10 @@ add_service_files(
   FILES
   MarkerPose.srv
   intervention_getpoint.srv
+  exploration_done.srv
+  start_exploration.srv
+
+
 )
 generate_messages(
   DEPENDENCIES

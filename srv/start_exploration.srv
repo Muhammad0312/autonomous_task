@@ -1,0 +1,7 @@
+# start_exploration.srv
+bool success 
+# Request
+---
+bool success 
+
+
