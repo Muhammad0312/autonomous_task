@@ -29,8 +29,7 @@ add_service_files(
   intervention_getpoint.srv
   exploration_done.srv
   start_exploration.srv
-
-
+  plan_to_object.srv
 )
 generate_messages(
   DEPENDENCIES

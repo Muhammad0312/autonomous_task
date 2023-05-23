@@ -7,8 +7,65 @@ import time
 from std_srvs.srv import Trigger, TriggerRequest
 from geometry_msgs.msg import PoseStamped
 
-from autonomous_task_NAK.srv import intervention_getpoint,exploration_done, start_exploration,MarkerPose
+from autonomous_task_NAK.srv import intervention_getpoint,exploration_done, start_exploration,MarkerPose,plan_to_object
+
 from std_srvs.srv import SetBool
+
+
+class move_close(py_trees.behaviour.Behaviour):
+    def __init__(self, name):
+        super(move_close, self).__init__(name)
+
+        # attach to blackboard and allow read access to object name
+        self.blackboard = self.attach_blackboard_client(name=self.name)
+                
+        # Blackboard variable to keep a track of which pickup location is next
+        self.blackboard.register_key(
+            "location", access=py_trees.common.Access.READ)
+        self.blackboard.register_key(
+            "location", access=py_trees.common.Access.WRITE)
+                
+    def setup(self):
+        self.logger.debug("  %s [move_close::setup()]" % self.name)
+        # service used to set goal of move behaviour
+        rospy.wait_for_service('/plan_closer_point')
+
+        # service used to check status of move behaviour
+        rospy.wait_for_service('object_reached')
+        try:
+            self.server_set_goal = rospy.ServiceProxy(
+                '/plan_closer_point', plan_to_object)
+            self.server_check_reached = rospy.ServiceProxy(
+                'object_reached', Trigger)
+
+            self.logger.debug(
+                "  %s [move_close::setup() Server connected!]" % self.name)
+        except rospy.ServiceException as e:
+            self.logger.debug("  %s [move_close::setup() ERROR!]" % self.name)
+
+    def initialise(self):
+        self.logger.debug("  %s [move_close::initialise()]" % self.name)
+
+        self.server_set_goal(self.blackboard.location)
+    
+
+    def update(self):
+
+        self.logger.debug("  {}: call service /object_reached".format(self.name))
+
+        resp = self.server_check_reached(TriggerRequest())
+
+        if resp.success:
+            return py_trees.common.Status.SUCCESS
+        else:
+            return py_trees.common.Status.RUNNING
+        
+        
+
+    def terminate(self, new_status):
+        self.logger.debug("  %s [move_close::terminate().terminate()][%s->%s]" %
+                          (self.name, self.status, new_status))
+
 
 
 ###   Move to point behaviour
@@ -201,15 +258,12 @@ if __name__ == "__main__":
     see_aruco = SeeAruco('see_aruco')
     explore = Explore('explore')
     go_pick = GoToPoint("go_pick",'pick')
-
+    Movecloser=move_close('move_close')
     # Create Behavior Tree
     root=py_trees.composites.Sequence(name="explore and see with go_pick", memory=True)
-    sub_root = py_trees.composites.Parallel(name="explore vs see", policy=py_trees.common.ParallelPolicy.SuccessOnOne())
-    
-    sub_root.add_children([see_aruco,explore])
-
-    
-    root.add_children([sub_root, go_pick])
+    sub_root1 = py_trees.composites.Parallel(name="explore vs see", policy=py_trees.common.ParallelPolicy.SuccessOnOne())
+    sub_root1.add_children([see_aruco,explore])
+    root.add_children([sub_root1, Movecloser,go_pick,])
 
     
 

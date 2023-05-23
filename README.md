@@ -20,4 +20,5 @@ last update:
 - rosrun frontier_explorationb move_to_pt.py
 - rosrun hands_on_perception aruco_pose_realsense_stonefish.py
 - rosrun hands-on-intervention intervention_integrated_stonefish.py 
-- rosrun autonomous_task_NAK perception_intervention_planning
+- rosrun frontier_explorationb move_to_point_planner_integration.py 
+- rosrun autonomous_task_NAK perception_intervention_planning.py

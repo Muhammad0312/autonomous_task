@@ -1,0 +1,8 @@
+# plan_to_object.srv
+geometry_msgs/PoseStamped pose_msg
+# Request
+---
+geometry_msgs/PoseStamped pose_msg
+
+
+
