@@ -1,0 +1,22 @@
+<launch>
+  <!-- Launch turtlebot_circuit1.launch -->
+  <include file="$(find frontier_explorationb)/launch/turtlebot_circuit1.launch" />
+
+  <!-- Run frontier_exploration_integrated.py -->
+  <node name="frontier_exploration_integrated" pkg="frontier_explorationb" type="frontier_exploration_integrated.py" output="screen" />
+
+  <!-- Run move_to_pt.py -->
+  <node name="move_to_pt" pkg="frontier_explorationb" type="move_to_pt.py" output="screen" />
+
+  <!-- Run aruco_pose_realsense_stonefish.py -->
+  <node name="aruco_pose_realsense_stonefish" pkg="hands_on_perception" type="aruco_pose_realsense_stonefish.py" output="screen" />
+
+  <!-- Run intervention_integrated_stonefish.py -->
+  <node name="intervention_integrated_stonefish" pkg="hands-on-intervention" type="intervention_integrated_stonefish.py" output="screen" />
+
+  <!-- Run move_to_point_planner_integration.py -->
+  <node name="move_to_point_planner_integration" pkg="frontier_explorationb" type="move_to_point_planner_integration.py" output="screen" />
+
+  <!-- Run perception_intervention_planning.py -->
+  <node name="perception_intervention_planning" pkg="autonomous_task_NAK" type="perception_intervention_planning.py" output="screen" />
+</launch>

@@ -1,0 +1,19 @@
+<launch>
+  <!-- Launch turtlebot_hoi.launch -->
+  <include file="$(find turtlebot_simulation)/launch/turtlebot_hoi.launch" />
+
+  <!-- Run FK_diff_drive.py -->
+  <node name="FK_diff_drive" pkg="hands-on-intervention" type="FK_diff_drive.py" output="screen" />
+
+  <!-- Run integration.py -->
+  <node name="integration" pkg="pose-graph-slam" type="integration.py" output="screen" />
+
+  <!-- Run aruco_pose_realsense_stonefish.py -->
+  <node name="aruco_pose_realsense_stonefish" pkg="hands_on_perception" type="aruco_pose_realsense_stonefish.py" output="screen" />
+
+  <!-- Run intervention_integrated_stonefish.py -->
+  <node name="intervention_integrated_stonefish" pkg="hands-on-intervention" type="intervention_integrated_stonefish.py" output="screen" />
+
+  <!-- Run perception_intervention -->
+  <node name="perception_intervention" pkg="autonomous_task_NAK" type="perception_intervention" output="screen" />
+</launch>
