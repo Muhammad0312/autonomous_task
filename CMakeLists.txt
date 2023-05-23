@@ -30,6 +30,7 @@ add_service_files(
   exploration_done.srv
   start_exploration.srv
   plan_to_object.srv
+  point_in_world.srv
 )
 generate_messages(
   DEPENDENCIES

@@ -45,8 +45,10 @@ class move_close(py_trees.behaviour.Behaviour):
 
     def initialise(self):
         self.logger.debug("  %s [move_close::initialise()]" % self.name)
+        print("self.blackboard.location before ",self.blackboard.location)
+        self.blackboard.location = self.server_set_goal(self.blackboard.location).pose_msg
+        print("self.blackboard.location after",self.blackboard.location)
 
-        self.server_set_goal(self.blackboard.location)
     
 
     def update(self):
