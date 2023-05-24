@@ -15,5 +15,5 @@
   <node name="intervention_integrated_stonefish" pkg="hands-on-intervention" type="intervention_integrated_stonefish.py" output="screen" />
 
   <!-- Run perception_intervention -->
-  <node name="perception_intervention" pkg="autonomous_task_NAK" type="perception_intervention" output="screen" />
+  <node name="perception_intervention" pkg="autonomous_task_NAK" type="perception_intervention.py" output="screen" />
 </launch>

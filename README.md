@@ -1,10 +1,34 @@
 ﻿# Hands-on Intervention
 
 last update:
-5May 9.04: Package made, orientation of EE set
+24May: Launch files renamed and subfolders. readme updated
 
 ## HOW TO RUN:
 
+# Intervention
+
+- roslaunch autonomous_task_NAK intervention_stonefish.launch
+- roslaunch autonomous_task_NAK roslaunch inetervention_hardware.launch
+
+# Intervention-Perception
+
+- roslaunch autonomous_task_NAK preception_intervention_stonefish.launch
+- roslaunch autonomous_task_NAK roslaunch preception_intervention_hardware.launch
+
+# Intervention-Perception-Planning
+
+- roslaunch autonomous_task_NAK three_stonefish.launch
+
+
+
+
+
+
+
+
+
+
+## OLD
 **standalone intervention hardware**
 
 - rosrun pose-graph-slam integration_hardware.py
