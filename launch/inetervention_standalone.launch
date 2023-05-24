@@ -1,0 +1,14 @@
+<launch>
+
+  <!-- Run aruco_pose_realsense_stonefish.py -->
+  <node name="integration_hardware" pkg="pose-graph-slam" type="integration_hardware.py" output="screen" />
+
+  <!-- Run integration.py -->
+  <node name="vw_to_wheel_frontier" pkg="frontier_explorationb" type="vw_to_wheel_frontier.py" output="screen" />
+
+  <!-- Run intervention_integrated_stonefish.py -->
+  <node name="standalone_controller_hardware" pkg="hands-on-intervention" type="standalone_controller_hardware.py" output="screen" />
+
+  <!-- Run perception_intervention -->
+  <node name="only_intervention" pkg="autonomous_task_NAK" type="only_intervention.py" output="screen" />
+</launch>

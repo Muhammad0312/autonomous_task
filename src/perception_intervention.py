@@ -138,6 +138,8 @@ class SeeAruco(py_trees.behaviour.Behaviour):
         if curr_z == 0:
             return py_trees.common.Status.RUNNING
         else:
+            # print('before: ', resp.pose.position.y)
+            # resp.pose.position.y += 10
             self.blackboard.location = resp
             return py_trees.common.Status.SUCCESS
 
@@ -161,7 +163,9 @@ if __name__ == "__main__":
     # go_up2 = GoToPoint("go_up",'',[-0.3,-0.3,-0.2,0,0,0])
 
     see_aruco = SeeAruco('see_aruco')
-    go_pick = GoToPoint("go_pick",'pick')
+    # go_pick_up = GoToPoint("up",'')
+    go_pick = GoToPoint("pick",'pick')
+    # go_pick_up2 = GoToPoint("up",'')
 
     # Create Behavior Tree
     root = py_trees.composites.Sequence(name="Mobile Pick n Place", memory=True)

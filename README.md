@@ -5,6 +5,13 @@ last update:
 
 ## HOW TO RUN:
 
+standalone intervention hardware
+
+- rosrun pose-graph-slam integration_hardware.py
+- rosrun frontier_explorationb vw_to_wheel_frontier.py
+- rosrun hands-on-intervention standalone_controller_hardware.py
+- rosrun autonomous_task_NAK only_intervention.py
+
 **intervention perception**
 - roslaunch turtlebot_simulation turtlebot_hoi.launch
 - rosrun hands-on-intervention FK_diff_drive.py
