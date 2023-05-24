@@ -5,7 +5,7 @@ last update:
 
 ## HOW TO RUN:
 
-standalone intervention hardware
+**standalone intervention hardware**
 
 - rosrun pose-graph-slam integration_hardware.py
 - rosrun frontier_explorationb vw_to_wheel_frontier.py
