@@ -5,8 +5,11 @@
   <!-- Run FK_diff_drive.py -->
   <node name="FK_diff_drive" pkg="hands-on-intervention" type="FK_diff_drive.py" output="screen" />
 
+  <!-- Run integration.py
+  <node name="integration" pkg="pose-graph-slam" type="integration.py" output="screen" /> -->
+
   <!-- Run integration.py -->
-  <node name="integration" pkg="pose-graph-slam" type="integration.py" output="screen" />
+  <node name="dead_reckoning_gt" pkg="hands-on-intervention" type="dead_reckoning_gt.py" output="screen" />
 
   <!-- Run aruco_pose_realsense_stonefish.py -->
   <node name="aruco_pose_realsense_stonefish" pkg="hands_on_perception" type="aruco_pose_realsense_stonefish.py" output="screen" />
