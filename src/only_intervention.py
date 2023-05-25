@@ -107,19 +107,37 @@ if __name__ == "__main__":
     rospy.init_node("behavior_trees")
     # print("nonooooo")
 
-    go_up1 = GoToPoint("go_up1",'',[0.0,0.8,-0.25,0,0,0])
+    # go_up1 = GoToPoint("go_up1",'',[0.0,0.8,-0.25,0,0,0])
     
-    go_pick = GoToPoint("go_pick1",'pick',[0.0,0.8,-0.15,0,0,0])
+    # go_pick = GoToPoint("go_pick1",'pick',[0.0,0.8,-0.15,0,0,0])
     
-    go_up2 = GoToPoint("go_up2",'',[0.0,0.8,-0.25,0,0,0])
+    # go_up2 = GoToPoint("go_up2",'',[0.0,0.8,-0.25,0,0,0])
     
     
     # # Create Behaviors
-    # go_up1 = GoToPoint("go_up1",'',[0.8,0.4,-0.25,0,0,0])
+    # go_up1 = GoToPoint("go_up1",'',[0.4,0.0,-0.25,0,0,0])
     
-    # go_pick = GoToPoint("go_pick1",'pick',[0.8,0.4,-0.14,0,0,0])
+    # go_pick = GoToPoint("go_pick1",'pick',[0.4,0.0,-0.14,0,0,0])
     
-    # go_up2 = GoToPoint("go_up2",'',[0.8,0.4,-0.25,0,0,0])
+    # go_up2 = GoToPoint("go_up2",'',[0.4,0.0,-0.25,0,0,0])
+
+    # go_up1 = GoToPoint("go_up1",'',[0.0,0.4,-0.30,0,0,0])
+    
+    # go_pick = GoToPoint("go_pick1",'pick',[0.0,0.4,-0.14,0,0,0])
+    
+    # go_up2 = GoToPoint("go_up2",'',[0.0,0.4,-0.30,0,0,0])
+
+    go_up1 = GoToPoint("go_up1",'',[0.4,0.4,-0.30,0,0,0])
+    
+    go_pick = GoToPoint("go_pick1",'pick',[0.4,0.4,-0.14,0,0,0])
+    
+    go_up2 = GoToPoint("go_up2",'',[0.4,0.4,-0.30,0,0,0])
+
+    go_up3 = GoToPoint("go_place",'',[0.8,0.8,-0.25,0,0,0])
+
+    go_place = GoToPoint("go_place",'place',[0.8,0.8,-0.14,0,0,0])
+    
+    go_up4 = GoToPoint("go_place",'',[0.8,0.8,-0.25,0,0,0])
 
     # go_up1 = GoToPoint("go_up",'',[0.8,0.4,-0.15,0,0,0])
 
@@ -133,7 +151,7 @@ if __name__ == "__main__":
     # Create Behavior Tree
     root = py_trees.composites.Sequence(name="Mobile Pick n Place", memory=True)
 
-    root.add_children([go_up1, go_pick, go_up2])
+    root.add_children([go_up1, go_pick, go_up2, go_up3, go_place, go_up4])
 
     # Add behaviors to the tree
     # root.add_children([go_up1, go_pick, go_up2, go_up3, go_place, go_up4])#, go_up1]) #, go_place, go_up2])

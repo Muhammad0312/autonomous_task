@@ -8,12 +8,12 @@ last update:
 # Intervention
 
 - roslaunch autonomous_task_NAK intervention_stonefish.launch
-- roslaunch autonomous_task_NAK roslaunch inetervention_hardware.launch
+- roslaunch autonomous_task_NAK inetervention_hardware.launch
 
 # Intervention-Perception
 
 - roslaunch autonomous_task_NAK preception_intervention_stonefish.launch
-- roslaunch autonomous_task_NAK roslaunch preception_intervention_hardware.launch
+- roslaunch autonomous_task_NAK preception_intervention_hardware.launch
 
 # Intervention-Perception-Planning
 
