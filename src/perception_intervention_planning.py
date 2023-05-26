@@ -6,7 +6,7 @@ import rospy
 import time
 from std_srvs.srv import Trigger, TriggerRequest
 from geometry_msgs.msg import PoseStamped
-
+import copy
 from autonomous_task_NAK.srv import intervention_getpoint,exploration_done, start_exploration,MarkerPose,plan_to_object
 
 from std_srvs.srv import SetBool
@@ -114,9 +114,41 @@ class GoToPoint(py_trees.behaviour.Behaviour):
 
     def initialise(self):
         self.logger.debug("  %s [GoToPoint::initialise()]" % self.name)
-
         self.server_set_goal(self.blackboard.location)
-    
+        # print(self.name)
+        print('normal: ', self.blackboard.location.pose.position.z)
+        if self.name == 'up2':
+            curr_loc = copy.deepcopy(self.blackboard.location)
+            curr_loc.pose.position.x = curr_loc.pose.position.x + 0.20
+            curr_loc.pose.position.y = curr_loc.pose.position.y - 0.40
+            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.20
+            print('up pose: ', curr_loc.pose.position.z)
+            self.server_set_goal(curr_loc)
+
+        if self.name == 'place':
+            curr_loc = copy.deepcopy(self.blackboard.location)
+            curr_loc.pose.position.x = curr_loc.pose.position.x + 0.20
+            curr_loc.pose.position.y = curr_loc.pose.position.y - 0.40
+            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.024
+            print('pick pose: ', curr_loc.pose.position.z)
+            self.server_set_goal(curr_loc)
+
+        if self.name == 'up':
+            print("i'm up")
+            curr_loc = copy.deepcopy(self.blackboard.location)
+            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.20
+            print('up pose: ', curr_loc.pose.position.z)
+            self.server_set_goal(curr_loc)
+
+        if self.name == 'pick':
+            print("i'm picking")
+            curr_loc = copy.deepcopy(self.blackboard.location)
+            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.02
+            print('pick pose: ', curr_loc.pose.position.z)
+            self.server_set_goal(curr_loc)
+        
+        # print("curr pickup loc: ", self.location)
+
 
     def update(self):
 
@@ -148,7 +180,6 @@ class GoToPoint(py_trees.behaviour.Behaviour):
         
         self.logger.debug("  %s [GoToPoint::terminate().terminate()][%s->%s]" %
                           (self.name, self.status, new_status))
-
 
 class SeeAruco(py_trees.behaviour.Behaviour):
     def __init__(self, name):
@@ -259,13 +290,22 @@ if __name__ == "__main__":
 
     see_aruco = SeeAruco('see_aruco')
     explore = Explore('explore')
-    go_pick = GoToPoint("go_pick",'pick')
     Movecloser=move_close('move_close')
+    # go_pick = GoToPoint("go_pick",'pick')
+    go_up1 = GoToPoint("up",'up')
+    pick = GoToPoint("pick",'pick')
+    go_up2 = GoToPoint("up",'up')
+
+    # go_up3 = GoToPoint("up2",'up2')
+    # place = GoToPoint("place",'place')
+    # go_up4 = GoToPoint("up2",'up2')
+
+    
     # Create Behavior Tree
     root=py_trees.composites.Sequence(name="explore and see with go_pick", memory=True)
     sub_root1 = py_trees.composites.Parallel(name="explore vs see", policy=py_trees.common.ParallelPolicy.SuccessOnOne())
     sub_root1.add_children([see_aruco,explore])
-    root.add_children([sub_root1, Movecloser,go_pick,])
+    root.add_children([sub_root1, Movecloser,go_up1,pick,go_up2])
 
     
 
