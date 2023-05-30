@@ -77,7 +77,7 @@ class GoToPoint(py_trees.behaviour.Behaviour):
 
         if self.name == 'up':
             curr_loc = copy.deepcopy(self.blackboard.location)
-            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.20
+            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.10
             print('up pose: ', curr_loc.pose.position.z)
             self.server_set_goal(curr_loc)
 

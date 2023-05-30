@@ -1,5 +1,4 @@
-﻿# Hands-on Intervention
-
+﻿
 last update:
 24May: Launch files renamed and subfolders. readme updated
 
@@ -8,7 +7,7 @@ last update:
 # Intervention
 
 - roslaunch autonomous_task_NAK intervention_stonefish.launch
-- roslaunch autonomous_task_NAK inetervention_hardware.launch
+- roslaunch autonomous_task_NAK intervention_hardware.launch
 
 # Intervention-Perception
 
