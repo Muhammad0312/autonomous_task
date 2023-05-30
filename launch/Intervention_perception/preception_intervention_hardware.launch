@@ -2,9 +2,14 @@
 
   <!-- Run FK_diff_drive.py -->
 
-  <node name="integration_hardware" pkg="pose-graph-slam" type="integration_hardware.py" output="screen" />
+  <!-- <node name="integration_hardware" pkg="pose-graph-slam" type="integration_hardware.py" output="screen" /> -->
+  <arg name="robot_name" default="turtlebot"/>
+
+  <include file="$(find frontier_explorationb)/launch/hector_stonefish_hardware.launch" />
 
   <node name="vw_to_wheel_frontier" pkg="frontier_explorationb" type="vw_to_wheel_frontier.py" output="screen" />
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find turtlebot_description)/rviz/turtlebot.rviz"/>
 
   <!-- Run aruco_pose_realsense_stonefish.py -->
   <node name="aruco_pose_realsense_hardware" pkg="hands_on_perception" type="aruco_pose_realsense_hardware.py" output="screen" />
