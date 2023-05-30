@@ -2,6 +2,19 @@
   <!-- Launch turtlebot_circuit1.launch -->
   <include file="$(find frontier_explorationb)/launch/turtlebot_circuit1.launch" />
 
+
+  <!-- Run FK_diff_drive.py -->
+  <node name="FK_diff_drive" pkg="hands-on-intervention" type="FK_diff_drive.py" output="screen" />
+
+  <!-- <node name="velocity_converter" pkg="frontier_explorationb" type="FK_diff_drive.py" output="screen"/> -->
+
+  <!-- Run integration.py -->
+  <node name="localization_integration" pkg="pose-graph-slam" type="localization_integration.py" output="screen" /> 
+
+  <!-- <node name="dead_reckoning_gt" pkg="hands-on-intervention" type="dead_reckoning_gt.py" output="screen" /> -->
+  
+  <!-- <node name="integration" pkg="pose-graph-slam" type="integration.py" output="screen" />  -->
+
   <!-- Run frontier_exploration_integrated.py -->
   <node name="frontier_exploration_integrated" pkg="frontier_explorationb" type="frontier_exploration_integrated.py" output="screen" />
 

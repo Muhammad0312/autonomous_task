@@ -120,7 +120,7 @@ class GoToPoint(py_trees.behaviour.Behaviour):
         if self.name == 'up2':
             curr_loc = copy.deepcopy(self.blackboard.location)
             curr_loc.pose.position.x = curr_loc.pose.position.x + 0.20
-            curr_loc.pose.position.y = curr_loc.pose.position.y - 0.40
+            curr_loc.pose.position.y = curr_loc.pose.position.y 
             curr_loc.pose.position.z = curr_loc.pose.position.z - 0.20
             print('up pose: ', curr_loc.pose.position.z)
             self.server_set_goal(curr_loc)
@@ -128,15 +128,15 @@ class GoToPoint(py_trees.behaviour.Behaviour):
         if self.name == 'place':
             curr_loc = copy.deepcopy(self.blackboard.location)
             curr_loc.pose.position.x = curr_loc.pose.position.x + 0.20
-            curr_loc.pose.position.y = curr_loc.pose.position.y - 0.40
-            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.024
+            curr_loc.pose.position.y = curr_loc.pose.position.y 
+            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.023
             print('pick pose: ', curr_loc.pose.position.z)
             self.server_set_goal(curr_loc)
 
         if self.name == 'up':
             print("i'm up")
             curr_loc = copy.deepcopy(self.blackboard.location)
-            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.20
+            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.19
             print('up pose: ', curr_loc.pose.position.z)
             self.server_set_goal(curr_loc)
 
@@ -296,16 +296,16 @@ if __name__ == "__main__":
     pick = GoToPoint("pick",'pick')
     go_up2 = GoToPoint("up",'up')
 
-    # go_up3 = GoToPoint("up2",'up2')
-    # place = GoToPoint("place",'place')
-    # go_up4 = GoToPoint("up2",'up2')
+    go_up3 = GoToPoint("up2",'up2')
+    place = GoToPoint("place",'place')
+    go_up4 = GoToPoint("up2",'up2')
 
     
     # Create Behavior Tree
     root=py_trees.composites.Sequence(name="explore and see with go_pick", memory=True)
     sub_root1 = py_trees.composites.Parallel(name="explore vs see", policy=py_trees.common.ParallelPolicy.SuccessOnOne())
     sub_root1.add_children([see_aruco,explore])
-    root.add_children([sub_root1, Movecloser,go_up1,pick,go_up2])
+    root.add_children([sub_root1, Movecloser,go_up1,pick,go_up2,go_up3,place,go_up4])
 
     
 

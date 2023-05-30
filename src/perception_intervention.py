@@ -61,29 +61,29 @@ class GoToPoint(py_trees.behaviour.Behaviour):
         print('normal: ', self.blackboard.location.pose.position.z)
         if self.name == 'up2':
             curr_loc = copy.deepcopy(self.blackboard.location)
-            curr_loc.pose.position.x = curr_loc.pose.position.x + 0.20
-            curr_loc.pose.position.y = curr_loc.pose.position.y - 0.40
-            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.20
+            curr_loc.pose.position.x = curr_loc.pose.position.x + 0.80
+            curr_loc.pose.position.y = curr_loc.pose.position.y + 0.20
+            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.10
             print('up pose: ', curr_loc.pose.position.z)
             self.server_set_goal(curr_loc)
 
         if self.name == 'place':
             curr_loc = copy.deepcopy(self.blackboard.location)
-            curr_loc.pose.position.x = curr_loc.pose.position.x + 0.20
-            curr_loc.pose.position.y = curr_loc.pose.position.y - 0.40
+            curr_loc.pose.position.x = curr_loc.pose.position.x + 0.80
+            curr_loc.pose.position.y = curr_loc.pose.position.y + 0.20
             curr_loc.pose.position.z = curr_loc.pose.position.z - 0.024
             print('pick pose: ', curr_loc.pose.position.z)
             self.server_set_goal(curr_loc)
 
         if self.name == 'up':
             curr_loc = copy.deepcopy(self.blackboard.location)
-            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.20
+            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.10
             print('up pose: ', curr_loc.pose.position.z)
             self.server_set_goal(curr_loc)
 
         if self.name == 'pick':
             curr_loc = copy.deepcopy(self.blackboard.location)
-            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.02
+            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.01
             print('pick pose: ', curr_loc.pose.position.z)
             self.server_set_goal(curr_loc)
         
