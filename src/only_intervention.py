@@ -127,26 +127,44 @@ if __name__ == "__main__":
     
     # go_up2 = GoToPoint("go_up2",'',[0.0,0.4,-0.30,0,0,0])
 
-    go_up1 = GoToPoint("go_up1",'',[0.4,0.4,-0.30,0,0,0])
+    # easy point
+    # go_up1 = GoToPoint("go_up1",'',[0.4,0.0,-0.30,0,0,0])
     
-    go_pick = GoToPoint("go_pick1",'pick',[0.4,0.4,-0.14,0,0,0])
+    # go_pick = GoToPoint("go_pick1",'pick',[0.4,0.0,-0.12,0,0,0])
     
-    go_up2 = GoToPoint("go_up2",'',[0.4,0.4,-0.30,0,0,0])
+    # go_up2 = GoToPoint("go_up2",'',[0.4,0.0,-0.30,0,0,0])
+
+    # go_up3 = GoToPoint("go_place",'',[0.8,0.0,-0.25,0,0,0])
+
+    # go_place = GoToPoint("go_place",'place',[0.8,0.0,-0.12,0,0,0])
+    
+    # go_up4 = GoToPoint("go_place",'',[0.8,0.0,-0.25,0,0,0])
+
+    # diagonal point
+    # go_up1 = GoToPoint("go_up1",'',[0.4,0.0,-0.30,0,0,0])
+    
+    # go_pick = GoToPoint("go_pick1",'pick',[0.4,0.0,-0.12,0,0,0])
+    
+    # go_up2 = GoToPoint("go_up2",'',[0.4,0.0,-0.30,0,0,0])
+
+    # go_up3 = GoToPoint("go_place",'',[0.4,0.4,-0.25,0,0,0])
+
+    # go_place = GoToPoint("go_place",'place',[0.4,0.4,-0.12,0,0,0])
+    
+    # go_up4 = GoToPoint("go_place",'',[0.4,0.4,-0.25,0,0,0])
+
+    # tricky point
+    go_up1 = GoToPoint("go_up1",'',[0.4,0.4,-0.25,0,0,0])
+    
+    go_pick = GoToPoint("go_pick1",'pick',[0.4,0.4,-0.12,0,0,0])
+    
+    go_up2 = GoToPoint("go_up2",'',[0.4,0.4,-0.25,0,0,0])
 
     go_up3 = GoToPoint("go_place",'',[0.8,0.8,-0.25,0,0,0])
 
-    go_place = GoToPoint("go_place",'place',[0.8,0.8,-0.14,0,0,0])
+    go_place = GoToPoint("go_place",'place',[0.8,0.8,-0.12,0,0,0])
     
     go_up4 = GoToPoint("go_place",'',[0.8,0.8,-0.25,0,0,0])
-
-    # go_up1 = GoToPoint("go_up",'',[0.8,0.4,-0.15,0,0,0])
-
-    # go_up3 = GoToPoint("go_place",'',[0.8,0.6,-0.25,0,0,0])
-
-    # go_place = GoToPoint("go_place",'place',[0.8,0.6,-0.14,0,0,0])
-    
-    # go_up4 = GoToPoint("go_place",'',[0.8,0.6,-0.25,0,0,0])
-    # go_up2 = GoToPoint("go_up",'',[0.8,0.4,-0.15,0,0,0])
 
     # Create Behavior Tree
     root = py_trees.composites.Sequence(name="Mobile Pick n Place", memory=True)
