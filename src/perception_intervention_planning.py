@@ -302,8 +302,8 @@ if __name__ == "__main__":
 
     
     # Create Behavior Tree
-    root=py_trees.composites.Sequence(name="explore and see with go_pick", memory=True)
-    sub_root1 = py_trees.composites.Parallel(name="explore vs see", policy=py_trees.common.ParallelPolicy.SuccessOnOne())
+    root=py_trees.composites.Sequence(name="Full Autonomy", memory=True)
+    sub_root1 = py_trees.composites.Parallel(name="Parellal", policy=py_trees.common.ParallelPolicy.SuccessOnOne())
     sub_root1.add_children([see_aruco,explore])
     root.add_children([sub_root1, Movecloser,go_up1,pick,go_up2,go_up3,place,go_up4])
 

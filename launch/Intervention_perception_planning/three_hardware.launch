@@ -1,0 +1,30 @@
+<launch>
+
+  <!-- <node name="integration_hardware" pkg="pose-graph-slam" type="integration_hardware.py" output="screen" /> -->
+  <arg name="robot_name" default="turtlebot"/>
+
+  <include file="$(find frontier_explorationb)/launch/hector_stonefish_hardware.launch" />
+
+  <node name="velocity_converter" pkg="frontier_explorationb" type="vw_to_wheel_frontier_exploration.py" output="screen"/>
+
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find turtlebot_description)/rviz/turtlebot.rviz"/>
+
+
+  <!-- Run frontier_exploration_integrated.py -->
+  <node name="frontier_exploration_integrated" pkg="frontier_explorationb" type="frontier_exploration_integrated.py" output="screen" />
+
+  <!-- Run move_to_pt.py -->
+  <node name="move_to_pt" pkg="frontier_explorationb" type="move_to_pt.py" output="screen" />
+
+  <!-- Run aruco_pose_realsense_stonefish.py -->
+  <node name="aruco_pose_realsense_hardware" pkg="hands_on_perception" type="aruco_pose_realsense_hardware.py" output="screen" />
+
+  <!-- Run intervention_integrated_stonefish.py -->
+  <node name="intervention_perception_integrated_hardware" pkg="hands-on-intervention" type="intervention_perception_integrated_hardware.py" output="screen" />
+
+  <!-- Run move_to_point_planner_integration.py -->
+  <node name="move_to_point_planner_integration" pkg="frontier_explorationb" type="move_to_point_planner_integration.py" output="screen" />
+
+  <!-- Run perception_intervention_planning.py -->
+  <node name="perception_intervention_planning" pkg="autonomous_task_NAK" type="perception_intervention_planning.py" output="screen" />
+</launch>
