@@ -5,7 +5,7 @@
   <!-- <node name="integration_hardware" pkg="pose-graph-slam" type="integration_hardware.py" output="screen" /> -->
   <arg name="robot_name" default="turtlebot"/>
 
-  <include file="$(find frontier_explorationb)/launch/hector_stonefish_hardware.launch" />
+  <!-- <include file="$(find frontier_explorationb)/launch/hector_stonefish_hardware.launch" /> -->
 
   <node name="vw_to_wheel_frontier" pkg="frontier_explorationb" type="vw_to_wheel_frontier.py" output="screen" />
 

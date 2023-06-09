@@ -129,21 +129,21 @@ class GoToPoint(py_trees.behaviour.Behaviour):
             curr_loc = copy.deepcopy(self.blackboard.location)
             curr_loc.pose.position.x = curr_loc.pose.position.x + 0.20
             curr_loc.pose.position.y = curr_loc.pose.position.y 
-            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.023
+            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.075
             print('pick pose: ', curr_loc.pose.position.z)
             self.server_set_goal(curr_loc)
 
         if self.name == 'up':
             print("i'm up")
             curr_loc = copy.deepcopy(self.blackboard.location)
-            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.19
+            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.10
             print('up pose: ', curr_loc.pose.position.z)
             self.server_set_goal(curr_loc)
 
         if self.name == 'pick':
             print("i'm picking")
             curr_loc = copy.deepcopy(self.blackboard.location)
-            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.02
+            curr_loc.pose.position.z = curr_loc.pose.position.z - 0.06 #- 0.025
             print('pick pose: ', curr_loc.pose.position.z)
             self.server_set_goal(curr_loc)
         
@@ -251,11 +251,18 @@ class Explore(py_trees.behaviour.Behaviour):
         # service used to check status of move behaviour
         rospy.wait_for_service('/exploration_done')
 
+        # To forceably stop the move2pt node
+        rospy.wait_for_service('/stop_mov2pt')
+
         try:
             self.run_exploration = rospy.ServiceProxy(
                 '/run_exploration', start_exploration)
             self.exploration_done = rospy.ServiceProxy(
                 '/exploration_done', Trigger)
+            self.stop_move2pt = rospy.ServiceProxy(
+                '/stop_mov2pt', Trigger) 
+            self.stop_frontier = rospy.ServiceProxy(
+                '/stop_frontier', Trigger)
             
             self.logger.debug(
                 "  %s [Explore::setup() Server connected!]" % self.name)
@@ -279,7 +286,14 @@ class Explore(py_trees.behaviour.Behaviour):
             return py_trees.common.Status.RUNNING
 
     def terminate(self, new_status): 
+        # stop stop_frontier node
+        self.logger.debug(" {}: call service /stop_frontier".format(self.name))
+        resp = self.stop_frontier(TriggerRequest())
         
+        # stop move2pt node
+        self.logger.debug(" {}: call service /stop_move2pt".format(self.name))
+        resp = self.stop_move2pt(TriggerRequest())
+
         self.logger.debug("  %s [Explore::terminate().terminate()][%s->%s]" %
                           (self.name, self.status, new_status))
 
@@ -302,10 +316,10 @@ if __name__ == "__main__":
 
     
     # Create Behavior Tree
-    root=py_trees.composites.Sequence(name="Full Autonomy", memory=True)
-    sub_root1 = py_trees.composites.Parallel(name="Parellal", policy=py_trees.common.ParallelPolicy.SuccessOnOne())
+    root=py_trees.composites.Sequence(name="explore and see with go_pick", memory=True)
+    sub_root1 = py_trees.composites.Parallel(name="explore vs see", policy=py_trees.common.ParallelPolicy.SuccessOnOne())
     sub_root1.add_children([see_aruco,explore])
-    root.add_children([sub_root1, Movecloser,go_up1,pick,go_up2,go_up3,place,go_up4])
+    root.add_children([sub_root1, Movecloser, go_up1, pick, go_up2,go_up3,place,go_up4])
 
     
 
